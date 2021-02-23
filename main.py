@@ -6,55 +6,55 @@
 # Last Modified Date: 2021.02.22
 # Last Modified By  : taotao <taotao@myhexin.com>
 
-import tkinter as tktest
-from tkinter import *
+import tkinter as tk
+# from tkinter import *
 from functools import partial
 from tkinter import messagebox
-
+# from math import pi
+# print(pi)
 
 # The function
-def show_windowslistbox():
+def listbox_window_show():
     """
-    show_windowslistbox is the first page
+    listbox_window_show is the first page
     """
     #############  list_box show
-    windowlistbox = Tk()
-    windowlistbox.title('The listbox windows')
-    windowlistbox.geometry('800x800')
-    windowlistbox.configure(bg='grey')
+    listbox_window = tk.Tk()
+    listbox_window.title('The listbox windows')
+    listbox_window.geometry('800x800')
+    listbox_window.configure(bg='grey')
 
     # Create a label
-    title = Label(windowlistbox, text = 'What\' your name?')
+    title = tk.Label(listbox_window, text = "What\" your name?")
     title.place(x = 40, y = 40)
 
-    # add listbox
+    ################# add listbox
     # NOTE: https://blog.csdn.net/weixin_42272768/article/details/100796024
-    list_box = Listbox(windowlistbox, selectmode=tk.EXTENDED)
+    print(tk.EXTENDED)
+
+    list_box = tk.Listbox(listbox_window, selectmode = tk.EXTENDED)
     list_box.place(x = 40, y = 100)
 
     for name in ['Tao', 'Steven', 'Jack', 'Susan', 'Tom', 'Jerry']:
         list_box.insert(tk.END, name)
 
     # do loop until choose Steven
-    # target_name
     def lb_click(event):
         # print(event)
-        # messagebox.showinfo(title=None, message = str(list_box.index(list_box.curselection()[0])))
         chosen_name = str(list_box.get(list_box.curselection()[0]))
         if chosen_name == 'Steven':
-            messagebox.showinfo(title=None, message = chosen_name + "  is the right one" )
-            # XXX
-            show_windowsmulti()
-            windowlistbox.destroy()
+            messagebox.showinfo(title=None, message = chosen_name + " is the one" )
+            combox_windows_show()
+            listbox_window.destroy()
         else:
-            messagebox.showinfo(title=None, message = chosen_name)
+            messagebox.showinfo(title=None, message = chosen_name + " is wrong choice")
 
     list_box.bind("<<ListboxSelect>>", lb_click)
 
 
-def show_windowsmulti():
+def combox_windows_show():
     """
-    show_windowslistbox is the second page
+    listbox_window_show is the second page
     """
     print('show_windowsmulti')
 
@@ -62,52 +62,54 @@ def show_windowsmulti():
 def check(name_entry, password_entry, loginwindow):
     password = password_entry.get()
     name     = name_entry.get()
-    # if True:
-    if name == "Steven" and password == "123":
+    if True:
+    # if name == "Steven" and password == "123":
         messagebox.showinfo("Login Success ", "The Test Start! ")
         # step 1: quit the loginwindow
         # so I did a google search, and found NOTE destroy command
         loginwindow.destroy()
-        show_windowslistbox()
+        mainwindow.destroy()
+        listbox_window_show()
     else:
         messagebox.showerror("Error","Your name or password is wrong")
 
     # third step
 
 def login_check():
-    loginwindow = Tk()
+    loginwindow = tk.Tk()
     loginwindow.title('Login Window')
     loginwindow.geometry('400x400')
     loginwindow.configure(bg='pink')
     # Create a label
     # TO create a label you can use this label class from tkinter
-    name=Label(loginwindow,text='Name:')
+    name = tk.Label(loginwindow,text='Name:')
     name.place(x=30,y=50)
     name.configure(bg='pink')
     # create another label to display password
-    password = Label(loginwindow, text='Password:')
+    password = tk.Label(loginwindow, text='Password:')
     password.place(x=30, y=90)
     password.configure(bg='pink')
 
-    username_entry = Entry(loginwindow)
+    username_entry = tk.Entry(loginwindow)
     username_entry.place(x=120, y=50)
 
-    password_entry = Entry(loginwindow)
+    password_entry = tk.Entry(loginwindow)
     password_entry.place(x=120, y=90)
 
-    # create Button Object
-    login_B = Button(loginwindow, text = 'Login', command = partial(check, username_entry, password_entry, loginwindow)) #
+    # create tk.Button Object
+    #
+    login_B = tk.Button(loginwindow, text = 'Login', command = partial(check, username_entry, password_entry, loginwindow)) #
     login_B.place(x=110, y=140)
-    Quit_B = Button(loginwindow, text = 'quit', command=exit)
+    Quit_B = tk.Button(loginwindow, text = 'quit', command = exit)
     Quit_B.place(x=240, y=140)
 
 
-mainwindow = Tk()  # This line will create an object of Tk class
+mainwindow = tk.Tk()  # This line will create an object of Tk class
 mainwindow.title('Test Login')  # title() function will help to st some title
 mainwindow.geometry('800x800')
 mainwindow.configure(bg='light GREY')  # configure() function will help to set some basic setting
 
-login = Button(mainwindow,
+login = tk.Button(mainwindow,
                bg='blue', text='login', fg='black', font='15', width=18, height=5,
                command=login_check)  # this will create an object of button class
 login.pack()

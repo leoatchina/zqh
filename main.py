@@ -87,9 +87,20 @@ def check_window_show():
 
     tk.Label(checkbtn_window, text="Please select names").grid(row=0, sticky=tk.W)
     #########3#######
-    checkbtns = []
-    # for name in names:
+    vars = []
+    cnt = 0
+    for name in names:
+        vars.append(tk.StringVar(value=""))
+        tk.Checkbutton(checkbtn_window, text = name, variable = vars[cnt], onvalue = name, offvalue= '').grid(row=cnt + 1, sticky=tk.W)
+        cnt += 1
 
+    def selected_show():
+        for var in vars:
+            print(var.get())
+        # messagebox.showinfo(title = None, message = "You have chosen " + message)
+
+    tk.Button(checkbtn_window, text = 'Show names', command=selected_show).grid(row= cnt + 2, sticky=tk.W, pady=4)
+    tk.Button(checkbtn_window, text = 'Quit', command=checkbtn_window.quit).grid(row= cnt + 3, sticky=tk.W, pady=4)
 
 
 

@@ -87,17 +87,25 @@ def check_window_show():
 
     tk.Label(checkbtn_window, text="Please select names").grid(row=0, sticky=tk.W)
     #########3#######
-    vars = []
+    btns = []
     cnt = 0
     for name in names:
-        vars.append(tk.StringVar(value=""))
-        tk.Checkbutton(checkbtn_window, text = name, variable = vars[cnt], onvalue = name, offvalue= '').grid(row=cnt + 1, sticky=tk.W)
+        btn = ttk.Checkbutton(checkbtn_window, text = name, state=['!alternate'])
+        btns.append(btn)
+        btn.grid(row=cnt + 1, sticky=tk.W)
         cnt += 1
 
     def selected_show():
-        for var in vars:
-            print(var.get())
-        # messagebox.showinfo(title = None, message = "You have chosen " + message)
+        message = ''
+        for idx, btn in enumerate(btns):
+            # print(idx, btn.state())
+            state = btn.state()
+            if 'selected' in state:
+                message += ' ' + names[idx]
+        if message == '':
+            messagebox.showinfo(title = None, message = "You have chosen Nobody")
+        else:
+            messagebox.showinfo(title = None, message = "You have chosen " + message)
 
     tk.Button(checkbtn_window, text = 'Show names', command=selected_show).grid(row= cnt + 2, sticky=tk.W, pady=4)
     tk.Button(checkbtn_window, text = 'Quit', command=checkbtn_window.quit).grid(row= cnt + 3, sticky=tk.W, pady=4)
@@ -108,8 +116,8 @@ def check_window_show():
 def check(name_entry, password_entry, loginwindow):
     password = password_entry.get()
     name     = name_entry.get()
-    if True:
-    # if name == "Steven" and password == "123":
+    # if True:
+    if name == "Steven" and password == "123":
         messagebox.showinfo("Login Success ", "The Test Start! ")
         # step 1: quit the loginwindow
         # so I did a google search, and found NOTE destroy command

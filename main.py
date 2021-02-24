@@ -49,9 +49,6 @@ def listbox_window_show():
 
 
 def combox_window_show():
-    """
-    use combox
-    """
     #############  list_box show
     combox_window = tk.Tk()
     combox_window.title('The combobox window')
@@ -72,13 +69,30 @@ def combox_window_show():
     def checkcmbo(event):
         chosen_name = combox.get()
         if chosen_name == 'Steven':
-            messagebox.showinfo(title=None, message = chosen_name + " is the author" )
+            combox_window.destroy()
+            messagebox.showinfo(title="YES", message = chosen_name + " is the author" )
+            # print('aaaa')
             check_window_show()
-            combobox_window.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_name + " is not the author")
 
     combox.bind("<<ComboboxSelected>>", checkcmbo)
+
+
+
+def check_window_show():
+    #############  list_box show
+    checkbtn_window = tk.Tk()
+    checkbtn_window.title('The checkbutton window')
+    checkbtn_window.geometry('400x800')
+    checkbtn_window.configure(bg='grey')
+    #################
+
+    tk.Label(checkbtn_window, text="Please select names").grid(row=0, sticky=tk.W)
+    #########3#######
+    checkbtns = []
+    # for name in names:
+
 
 
 

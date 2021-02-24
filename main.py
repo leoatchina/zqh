@@ -7,20 +7,18 @@
 # Last Modified By  : taotao <taotao@myhexin.com>
 
 import tkinter as tk
-# from tkinter import *
+from tkinter import ttk
 from functools import partial
 from tkinter import messagebox
-# from math import pi
-# print(pi)
 
-# The function
+names = ['Ross', 'Steven', 'Jack', 'Susan', 'Tom', 'Jerry']
 def listbox_window_show():
     """
     listbox_window_show is the first page
     """
     #############  list_box show
     listbox_window = tk.Tk()
-    listbox_window.title('The listbox windows')
+    listbox_window.title('The listbox window')
     listbox_window.geometry('800x800')
     listbox_window.configure(bg='grey')
 
@@ -30,12 +28,10 @@ def listbox_window_show():
 
     ################# add listbox
     # NOTE: https://blog.csdn.net/weixin_42272768/article/details/100796024
-    print(tk.EXTENDED)
-
     list_box = tk.Listbox(listbox_window, selectmode = tk.EXTENDED)
     list_box.place(x = 40, y = 100)
 
-    for name in ['Tao', 'Steven', 'Jack', 'Susan', 'Tom', 'Jerry']:
+    for name in names:
         list_box.insert(tk.END, name)
 
     # do loop until choose Steven
@@ -44,7 +40,7 @@ def listbox_window_show():
         chosen_name = str(list_box.get(list_box.curselection()[0]))
         if chosen_name == 'Steven':
             messagebox.showinfo(title=None, message = chosen_name + " is the one" )
-            combox_windows_show()
+            combox_window_show()
             listbox_window.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_name + " is wrong choice")
@@ -52,11 +48,39 @@ def listbox_window_show():
     list_box.bind("<<ListboxSelect>>", lb_click)
 
 
-def combox_windows_show():
+def combox_window_show():
     """
-    listbox_window_show is the second page
+    use combox
     """
-    print('show_windowsmulti')
+    #############  list_box show
+    combox_window = tk.Tk()
+    combox_window.title('The combobox window')
+    combox_window.geometry('400x256')
+    combox_window.configure(bg='grey')
+
+    ###################
+    title = tk.Label(combox_window, text = "Who is the author of this program?")
+    title.place(x = 40, y = 40)
+    ###########################
+    cmbx_value = tk.StringVar()
+    ################# add combobox
+    combox = ttk.Combobox(combox_window, width = 30, textvariable = cmbx_value)
+    combox.place(x = 40, y = 60)
+    combox['value'] = names
+    combox.current(0)
+
+    def checkcmbo(event):
+        chosen_name = combox.get()
+        if chosen_name == 'Steven':
+            messagebox.showinfo(title=None, message = chosen_name + " is the author" )
+            check_window_show()
+            combobox_window.destroy()
+        else:
+            messagebox.showinfo(title=None, message = chosen_name + " is not the author")
+
+    combox.bind("<<ComboboxSelected>>", checkcmbo)
+
+
 
 
 def check(name_entry, password_entry, loginwindow):

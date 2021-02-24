@@ -23,7 +23,7 @@ def listbox_window_show():
     listbox_window.configure(bg='grey')
 
     # Create a label
-    title = tk.Label(listbox_window, text = "What\" your name?")
+    title = tk.Label(listbox_window, text = "What\" your name? please double click!")
     title.place(x = 40, y = 40)
 
     ################# add listbox
@@ -45,7 +45,7 @@ def listbox_window_show():
         else:
             messagebox.showinfo(title=None, message = chosen_name + " is wrong choice")
 
-    list_box.bind("<<ListboxSelect>>", lb_click)
+    list_box.bind("<Double-1>", lb_click)
 
 
 def combox_window_show():
@@ -59,25 +59,22 @@ def combox_window_show():
     title = tk.Label(combox_window, text = "Who is the author of this program?")
     title.place(x = 40, y = 40)
     ###########################
-    cmbx_value = tk.StringVar()
+    # cmbx_value = tk.StringVar()
     ################# add combobox
-    combox = ttk.Combobox(combox_window, width = 30, textvariable = cmbx_value)
+    combox = ttk.Combobox(combox_window, width = 30)
     combox.place(x = 40, y = 60)
     combox['value'] = names
     combox.current(0)
 
-    def checkcmbo(event):
+    def selectcmbx(event):
         chosen_name = combox.get()
         if chosen_name == 'Steven':
-            combox_window.destroy()
             messagebox.showinfo(title="YES", message = chosen_name + " is the author" )
-            # print('aaaa')
             check_window_show()
+            combox_window.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_name + " is not the author")
-
-    combox.bind("<<ComboboxSelected>>", checkcmbo)
-
+    combox.bind("<<ComboboxSelected>>", selectcmbx)
 
 
 def check_window_show():
@@ -106,7 +103,7 @@ def check(name_entry, password_entry, loginwindow):
         # step 1: quit the loginwindow
         # so I did a google search, and found NOTE destroy command
         loginwindow.destroy()
-        mainwindow.destroy()
+        # mainwindow.destroy()
         listbox_window_show()
     else:
         messagebox.showerror("Error","Your name or password is wrong")

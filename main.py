@@ -103,7 +103,6 @@ def check(name_entry, password_entry, loginwindow):
         # step 1: quit the loginwindow
         # so I did a google search, and found NOTE destroy command
         loginwindow.destroy()
-        # mainwindow.destroy()
         listbox_window_show()
     else:
         messagebox.showerror("Error","Your name or password is wrong")
@@ -111,6 +110,7 @@ def check(name_entry, password_entry, loginwindow):
     # third step
 
 def login_check():
+    mainwindow.withdraw()
     loginwindow = tk.Tk()
     loginwindow.title('Login Window')
     loginwindow.geometry('400x400')
@@ -143,6 +143,7 @@ mainwindow = tk.Tk()  # This line will create an object of Tk class
 mainwindow.title('Test Login')  # title() function will help to st some title
 mainwindow.geometry('800x800')
 mainwindow.configure(bg='light GREY')  # configure() function will help to set some basic setting
+
 
 login = tk.Button(mainwindow,
                bg='blue', text='login', fg='black', font='15', width=18, height=5,

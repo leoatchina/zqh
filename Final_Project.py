@@ -3,6 +3,8 @@ from tkinter import ttk
 from functools import partial
 from tkinter import messagebox
 
+
+################################################# lists
 names = ['A. PIN Voter',"\n",'B. Time of Voter',"\n", 'C. Email address of Voter',"\n", 'D. IP address of voter']\
 
 Question_Second=["A.By providing high_bandwidth connections between devices,enabling data packets to be transmitted as qucikly as possible.","\n",
@@ -16,7 +18,19 @@ Question_Third=["A.The ability to use a hierarchical naming system to avoid nami
                 "D. The ability to use muliple protocols such as HTTP, IP and SMTP to transfer data"]
 
 
-########################################################第一个窗口
+Question_Four=["A. Copyright information for the image","\n",
+               "B. The data and time the image was created","\n",
+               "C. The dimensions (number of rows and columns of pixels) of the image","\n",
+               "D. A duplicate copy of the data","\n"]
+
+
+Question_Five=[]
+
+
+
+
+
+########################################################第一个窗口#########################################################
 def listbox_window_show():
     """
     listbox_window_show is the first page
@@ -28,12 +42,10 @@ def listbox_window_show():
     listbox_window.configure(bg='white')
 
     # Create a label
-    title = tk.Label(listbox_window, text = "Which of the following is least likely to be included in the Voting database\"?",
+    title = tk.Label(listbox_window, text = "Which of the following is least likely to be included in the Voting database ?",
                      font = "40" )
     title.place(x = 180, y = 40)
 
-    # add listbox
-    # NOTE: https://blog.csdn.net/weixin_42272768/article/details/100796024
     list_box = tk.Listbox(listbox_window, selectmode = tk.EXTENDED,width=20,border=0)
     list_box.place(x = 100, y = 150)
 
@@ -45,7 +57,7 @@ def listbox_window_show():
         # print(event)
         chosen_name = str(list_box.get(list_box.curselection()[0]))
         if chosen_name == 'C. Email address of Voter':
-            messagebox.showinfo(title=None, message = chosen_name + " is the one" )
+            messagebox.showinfo(title=None, message = "You are Rightr" )
             listbox_window_second_show()
             listbox_window.destroy()
 
@@ -55,7 +67,7 @@ def listbox_window_show():
     list_box.bind("<Double-1>", lb_click)
 
 
-#######################################################第二题
+#######################################################第二题##############################################
 
 def listbox_window_second_show():
 
@@ -79,7 +91,7 @@ def listbox_window_second_show():
     def lb_click_Second(event):
         chosen_answer_second = str(list_box_second.get(list_box_second.curselection()[0]))
         if chosen_answer_second == "B.By providing multiple paths between devices, enabling routing to occur even in the presence of a failed component. ":
-            messagebox.showinfo(title=None, message = chosen_answer_second + " is the one")
+            messagebox.showinfo(title=None, message = "You are Right")
             combox_window_show()
             listbox_window_second.destroy()
         else:
@@ -89,7 +101,7 @@ def listbox_window_second_show():
 
 
 
-#####################第三踢
+################################################第三踢#######################################################
 def combox_window_show():
     #  list_box show
     combox_window = tk.Tk()
@@ -108,16 +120,15 @@ def combox_window_show():
     def selectcmbx(event):
         chosen_answer_second_one = combox.get()
         if chosen_answer_second_one == 'B. The ability to provide data transmission even when some connections have have failed':
-            messagebox.showinfo(title="YES", message = chosen_answer_second_one + " is the answer!" )
-            # combox_windows_second_show()
-            mainwindow.destroy()
+            messagebox.showinfo(title="YES", message = "You are Right!" )
+            combox_windows_second_show()
             combox_window.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_answer_second_one + " is not the answer!")
     combox.bind("<<ComboboxSelected>>", selectcmbx)
 
 
-###############################第四个窗口
+###################################################第四个题#############################################
 def combox_windows_second_show():
     #  list_box show
     combox_window_second = tk.Tk()
@@ -126,23 +137,39 @@ def combox_windows_second_show():
     combox_window_second.configure(bg='white')
 
 
-    title = tk.Label(combox_window_second, text = "Which of the following is a characteristic of the failt-tolerant nature of routing on the internet?")
+    title = tk.Label(combox_window_second, text = "A lsit of binary values (0 or 1) is used to represent a black-and-white image. Which of the following is LEAST likely to stored as metadata associated with the image?")
     title.place(x = 80, y = 40)
     # cmbx_value = tk.StringVar()
-    combox = ttk.Combobox(combox_window_second, width = 60)
-    combox.place(x = 20, y = 150)
-    combox['value'] = Question_Third
-    combox.current(0)
+    combox_second = ttk.Combobox(combox_window_second, width = 60)
+    combox_second.place(x = 20, y = 150)
+    combox_second['value'] = Question_Four
+    combox_second.current(0)
 
     def selectcmbx(event):
-        chosen_answer_second_one = combox.get()
-        if chosen_answer_second_one == 'B. The ability to provide data transmission even when some connections have have failed':
-            messagebox.showinfo(title="YES", message = chosen_answer_second_one + " is the answer!" )
+        chosen_answer_second_one = combox_second.get()
+        if chosen_answer_second_one == 'C. The dimensions (number of rows and columns of pixels) of the image':
+            messagebox.showinfo(title="YES", message ="You are Right!" )
             #combox_windows_second_show() 下一个界面
             combox_window_second.destroy()
+
         else:
             messagebox.showinfo(title=None, message = chosen_answer_second_one + " is not the answer!")
-    combox.bind("<<ComboboxSelected>>", selectcmbx)
+    combox_second.bind("<<ComboboxSelected>>", selectcmbx)
+
+#####################################第五题#################################################3
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ''''# 最后一个窗口
@@ -180,7 +207,7 @@ def check_window_show():
     tk.Button(checkbtn_window, text = 'Show names', command=selected_show).grid(row= cnt + 2, sticky=tk.W, pady=4)
     tk.Button(checkbtn_window, text = 'Quit', command=checkbtn_window.quit).grid(row= cnt + 3, sticky=tk.W, pady=4)
 '''
-
+################################################login###################################################
 
 def check(name_entry, password_entry, loginwindow):
     password = password_entry.get()
@@ -195,7 +222,8 @@ def check(name_entry, password_entry, loginwindow):
     else:
         messagebox.showerror("Error","Your name or password is wrong")
 
-    # third step
+
+
 
 def login_check():
     mainwindow.withdraw()
@@ -238,3 +266,15 @@ login = tk.Button(mainwindow,
                command=login_check)  # this will create an object of button class
 login.pack()
 mainwindow.mainloop()  # mianloop() function Will show the window
+
+
+
+
+
+
+
+
+
+
+
+

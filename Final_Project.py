@@ -5,23 +5,9 @@ from tkinter import messagebox
 
 
 ################################################# lists
-names = ['A. PIN Voter',"\n",'B. Time of Voter',"\n", 'C. Email address of Voter',"\n", 'D. IP address of voter']\
-
-Question_Second=["A.By providing high_bandwidth connections between devices,enabling data packets to be transmitted as qucikly as possible.","\n",
-                 "B.By providing multiple paths between devices, enabling routing to occur even in the presence of a failed component. ","\n",
-                 "C.By providing open network protocols, ensuring that all devices on the network are interacting in a standard way.","\n",
-                 "D.By providing software to monitor all network traffic, ensure that data packets are sent and received in the proper odrer."]
-
-Question_Third=["A.The ability to use a hierarchical naming system to avoid naming conflicts","\n",
-                "B. The ability to provide data transmission even when some connections have have failed","\n",
-                "C. The ability to resolve errors in domain name system (DNS) lookups","\n",
-                "D. The ability to use muliple protocols such as HTTP, IP and SMTP to transfer data"]
 
 
-Question_Four=["A. Copyright information for the image","\n",
-               "B. The data and time the image was created","\n",
-               "C. The dimensions (number of rows and columns of pixels) of the image","\n",
-               "D. A duplicate copy of the data","\n"]
+
 
 
 Question_Five=[]
@@ -31,7 +17,7 @@ Question_Five=[]
 
 
 ########################################################第一个窗口#########################################################
-def listbox_window_show():
+def listbox_window_show(Question_One):
     """
     listbox_window_show is the first page
     """
@@ -49,7 +35,7 @@ def listbox_window_show():
     list_box = tk.Listbox(listbox_window, selectmode = tk.EXTENDED,width=20,border=0)
     list_box.place(x = 100, y = 150)
 
-    for name in names:
+    for name in Question_One:
         list_box.insert(tk.END, name)
 
     # do loop until choose Steven
@@ -57,10 +43,13 @@ def listbox_window_show():
         # print(event)
         chosen_name = str(list_box.get(list_box.curselection()[0]))
         if chosen_name == 'C. Email address of Voter':
-            messagebox.showinfo(title=None, message = "You are Rightr" )
-            listbox_window_second_show()
+            messagebox.showinfo(title=None, message = "You are Right" )
+            Question_Second=["A.By providing high_bandwidth connections between devices,enabling data packets to be transmitted as qucikly as possible.","\n",
+                             "B.By providing multiple paths between devices, enabling routing to occur even in the presence of a failed component. ","\n",
+                             "C.By providing open network protocols, ensuring that all devices on the network are interacting in a standard way.","\n",
+                             "D.By providing software to monitor all network traffic, ensure that data packets are sent and received in the proper odrer."]
+            listbox_window_second_show(Question_Second)
             listbox_window.destroy()
-
         else:
             messagebox.showinfo(title=None, message = chosen_name + " is wrong choice")
 
@@ -69,7 +58,7 @@ def listbox_window_show():
 
 #######################################################第二题##############################################
 
-def listbox_window_second_show():
+def listbox_window_second_show(Question_Second):
 
     listbox_window_second = tk.Tk()
     listbox_window_second.title('Question two')
@@ -92,7 +81,11 @@ def listbox_window_second_show():
         chosen_answer_second = str(list_box_second.get(list_box_second.curselection()[0]))
         if chosen_answer_second == "B.By providing multiple paths between devices, enabling routing to occur even in the presence of a failed component. ":
             messagebox.showinfo(title=None, message = "You are Right")
-            combox_window_show()
+            Question_Third=["A.The ability to use a hierarchical naming system to avoid naming conflicts","\n",
+                            "B. The ability to provide data transmission even when some connections have have failed","\n",
+                            "C. The ability to resolve errors in domain name system (DNS) lookups","\n",
+                            "D. The ability to use muliple protocols such as HTTP, IP and SMTP to transfer data"]
+            combox_window_show(Question_Third)
             listbox_window_second.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_answer_second + " is wrong choice")
@@ -102,7 +95,7 @@ def listbox_window_second_show():
 
 
 ################################################第三踢#######################################################
-def combox_window_show():
+def combox_window_show(Question_Third):
     #  list_box show
     combox_window = tk.Tk()
     combox_window.title('Question three')
@@ -121,7 +114,11 @@ def combox_window_show():
         chosen_answer_second_one = combox.get()
         if chosen_answer_second_one == 'B. The ability to provide data transmission even when some connections have have failed':
             messagebox.showinfo(title="YES", message = "You are Right!" )
-            combox_windows_second_show()
+            Question_Four=["A. Copyright information for the image","\n",
+                           "B. The data and time the image was created","\n",
+                           "C. The dimensions (number of rows and columns of pixels) of the image","\n",
+                           "D. A duplicate copy of the data","\n"]
+            combox_windows_second_show(Question_Four)
             combox_window.destroy()
         else:
             messagebox.showinfo(title=None, message = chosen_answer_second_one + " is not the answer!")
@@ -129,7 +126,7 @@ def combox_window_show():
 
 
 ###################################################第四个题#############################################
-def combox_windows_second_show():
+def combox_windows_second_show(Question_Four):
     #  list_box show
     combox_window_second = tk.Tk()
     combox_window_second.title('Question four')
@@ -182,11 +179,11 @@ def check_window_show():
     checkbtn_window.configure(bg='white')
 
 
-    tk.Label(checkbtn_window, text="Please select names").grid(row=0, sticky=tk.W)
+    tk.Label(checkbtn_window, text="Please select Question_One").grid(row=0, sticky=tk.W)
 
     btns = []
     cnt = 0
-    for name in names:
+    for name in Question_One:
         btn = ttk.Checkbutton(checkbtn_window, text = name, state=['!alternate'])
         btns.append(btn)
         btn.grid(row=cnt + 1, sticky=tk.W)
@@ -198,13 +195,13 @@ def check_window_show():
             # print(idx, btn.state())
             state = btn.state()
             if 'selected' in state:
-                message += ' ' + names[idx]
+                message += ' ' + Question_One[idx]
         if message == '':
             messagebox.showinfo(title = None, message = "You have chosen Nobody")
         else:
             messagebox.showinfo(title = None, message = "You have chosen " + message)
 
-    tk.Button(checkbtn_window, text = 'Show names', command=selected_show).grid(row= cnt + 2, sticky=tk.W, pady=4)
+    tk.Button(checkbtn_window, text = 'Show Question_One', command=selected_show).grid(row= cnt + 2, sticky=tk.W, pady=4)
     tk.Button(checkbtn_window, text = 'Quit', command=checkbtn_window.quit).grid(row= cnt + 3, sticky=tk.W, pady=4)
 '''
 ################################################login###################################################
@@ -218,7 +215,8 @@ def check(name_entry, password_entry, loginwindow):
         # step 1: quit the loginwindow
         # so I did a google search, and found NOTE destroy command
         loginwindow.destroy()
-        listbox_window_show()
+        Question_One = ['A. PIN Voter',"\n",'B. Time of Voter',"\n", 'C. Email address of Voter',"\n", 'D. IP address of voter']
+        listbox_window_show(Question_One)
     else:
         messagebox.showerror("Error","Your name or password is wrong")
 
